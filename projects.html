@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Ashrith Reddy</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ── Extra detailing only — no design changes ── */
+
+        .logo { font-family: 'Fira Code', monospace; font-size: 1.2rem; font-weight: 700; color: var(--text); letter-spacing: 2px; }
+        .logo span { color: var(--accent); animation: blink 1s infinite; }
+
+        /* Active nav link */
+        .nav-links a.active { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+        /* Breadcrumb trail */
+        .breadcrumb {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+        }
+        .breadcrumb span { color: var(--accent); }
+
+        /* Project count badge next to title */
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+        .section-title { margin-bottom: 0; }
+        .project-count-badge {
+            background: rgba(31, 165, 210, 0.12);
+            color: var(--accent);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(31, 165, 210, 0.25);
+        }
+
+        /* Search / filter bar */
+        .search-bar-wrap {
+            margin-bottom: 18px;
+            position: relative;
+        }
+        .search-bar-wrap input {
+            width: 100%;
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 8px;
+            padding: 9px 14px 9px 36px;
+            color: var(--text);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.82rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-bar-wrap input:focus { border-color: var(--accent); }
+        .search-bar-wrap input::placeholder { color: var(--text-dim); }
+        .search-icon {
+            position: absolute;
+            left: 11px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
+
+        /* Category filter tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.72rem;
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: transparent;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-tab:hover { color: var(--text); border-color: var(--accent); }
+        .filter-tab.active { background: rgba(31,165,210,0.15); color: var(--accent); border-color: var(--accent); }
+
+        /* Glass card tweaks for project items */
+        #project-list .glass-card {
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            transition: border-color 0.2s, transform 0.15s;
+            cursor: default;
+            position: relative;
+        }
+        #project-list .glass-card:hover { border-color: rgba(31,165,210,0.25); transform: translateX(3px); }
+        #project-list .glass-card h4 { font-size: 0.95rem; margin: 6px 0 4px; }
+        #project-list .glass-card p  { font-size: 0.78rem; color: var(--text-dim); word-break: break-all; margin-bottom: 0; }
+
+        /* Project group title styling */
+        .project-group-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+        .project-group-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.06);
+        }
+
+        /* Console box upgrades */
+        .console-box { position: sticky; top: 110px; }
+
+        .console-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .console-dots { display: flex; gap: 5px; }
+        .cdot { width: 10px; height: 10px; border-radius: 50%; }
+        .cdot-r { background: #ff5f57; }
+        .cdot-y { background: #febc2e; }
+        .cdot-g { background: #28c840; }
+        .console-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-left: auto;
+            letter-spacing: 0.08em;
+        }
+
+        #console-display {
+            background: rgba(0,0,0,0.3);
+            padding: 10px 14px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            font-size: 0.82rem;
+        }
+        #console-display::before { content: '> '; color: var(--accent); }
+
+        /* Frame label */
+        .frame-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin: 12px 0 6px;
+            letter-spacing: 0.06em;
+        }
+
+        /* Open link button spacing */
+        .open-link { display: inline-block; }
+
+        /* Footer */
+        footer { text-align: center; padding: 40px 0 20px; color: var(--text-dim); font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px; }
+
+        /* Hidden card for filtering */
+        .glass-card.hidden { display: none; }
+    </style>
+</head>
+<body>
+    <nav class="sticky-nav">
+        <div class="nav-content">
+            <div class="logo">AR<span>_</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="mailto:ashrithreddy467@gmail.com" class="nav-btn">Contact Me</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Breadcrumb -->
+        <p class="breadcrumb">~/<span>ashrith</span>/projects</p>
+
+        <!-- Title row with count -->
+        <div class="title-row">
+            <h2 class="section-title">Projects Playground</h2>
+            <span class="project-count-badge" id="count-badge">33 files</span>
+        </div>
+
+        <div class="main-grid projects-grid">
+
+            <!-- LEFT: project list -->
+            <div class="col-left">
+
+                <!-- Search -->
+                <div class="search-bar-wrap">
+                    <span class="search-icon">⌕</span>
+                    <input type="text" id="search-input" placeholder="Search projects..." autocomplete="off">
+                </div>
+
+                <!-- Filter tabs -->
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="All">All</button>
+                    <button class="filter-tab" data-filter="HTML">HTML</button>
+                    <button class="filter-tab" data-filter="CSS">CSS</button>
+                    <button class="filter-tab" data-filter="JAVASCRIPT">JS</button>
+                </div>
+
+                <div id="project-list"></div>
+            </div>
+
+            <!-- RIGHT: preview -->
+            <div class="col-right">
+                <div class="glass-card console-box">
+
+                    <!-- macOS-style dots + label -->
+                    <div class="console-header">
+                        <div class="console-dots">
+                            <div class="cdot cdot-r"></div>
+                            <div class="cdot cdot-y"></div>
+                            <div class="cdot cdot-g"></div>
+                        </div>
+                        <span class="console-label">preview.output</span>
+                    </div>
+
+                    <h3>Project Output</h3>
+                    <p id="console-display">Select a project to load its output here.</p>
+
+                    <p class="frame-label">// live preview</p>
+                    <iframe id="project-frame" title="Project Preview"></iframe>
+
+                    <a id="open-project-link" class="run-btn open-link" href="#" target="_blank" rel="noopener noreferrer">↗ Open in New Tab</a>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>© 2024 Ashrith Reddy • Built with Code &amp; Coffee</footer>
+    </div>
+
+    <script>
+    const projectFiles = [
+        { name: "Portfolio Home",     path: "index.html",                                              tag: "HTML",       category: "HTML" },
+        { name: "Testing Page",       path: "../testing.html",                                         tag: "HTML",       category: "HTML" },
+        { name: "Temperature Converter", path: "../Tempconverters.html",                               tag: "HTML",       category: "HTML" },
+        { name: "Profile Page",       path: "../Profilepage-1.html",                                   tag: "HTML",       category: "HTML" },
+        { name: "My First Project",   path: "../My first project.html",                                tag: "HTML",       category: "HTML" },
+        { name: "Main Index",         path: "../index.html",                                           tag: "HTML",       category: "HTML" },
+        { name: "Animation Page",     path: "../animation.html",                                       tag: "HTML",       category: "HTML" },
+        { name: "KLH Page",           path: "../KLH.html",                                            tag: "HTML",       category: "HTML" },
+        { name: "College Timetable",  path: "../college timetable.html",                               tag: "HTML",       category: "HTML" },
+        { name: "Bootstrap Project",  path: "../Bootstrap/index.html",                                 tag: "CSS",        category: "CSS"  },
+        { name: "Fwd Project",        path: "../Fwdproject/index.html",                                tag: "CSS",        category: "CSS"  },
+        { name: "Menu Card",          path: "../MENUCARD/index.html",                                  tag: "CSS",        category: "CSS"  },
+        { name: "CSS Main Project",   path: "../CSS/index.html",                                       tag: "CSS",        category: "CSS"  },
+        { name: "Media Query Page",   path: "../CSS/Media tags/media query.html",                      tag: "CSS",        category: "CSS"  },
+        { name: "Application Form",   path: "../CSS/project-(application form)/application form.html", tag: "CSS",        category: "CSS"  },
+        { name: "Chatbox Project",    path: "../CSS/project-(chatbox)/chatbox.html",                   tag: "CSS",        category: "CSS"  },
+        { name: "Exercise 1",         path: "../CSS/project-1/exercise-1.html",                        tag: "CSS",        category: "CSS"  },
+        { name: "Exercise 2",         path: "../CSS/project-2/exercise-2.html",                        tag: "CSS",        category: "CSS"  },
+        { name: "Menu Project 1",     path: "../CSS/project-3(menu)/menu-1.html",                      tag: "CSS",        category: "CSS"  },
+        { name: "Menu Project 2",     path: "../CSS/project-4(menu-2)/menu-2.html",                    tag: "CSS",        category: "CSS"  },
+        { name: "Project 5 KLH",      path: "../CSS/project-5.html/klh.html",                         tag: "CSS",        category: "CSS"  },
+        { name: "Project 6 Class",    path: "../CSS/project-6/class.html",                             tag: "CSS",        category: "CSS"  },
+        { name: "Project 7",          path: "../CSS/project-7/index.html",                             tag: "CSS",        category: "CSS"  },
+        { name: "Project 8",          path: "../CSS/project-8/index.html",                             tag: "CSS",        category: "CSS"  },
+        { name: "Navtag Project",     path: "../CSS/navtag.project/index.html",                        tag: "CSS",        category: "CSS"  },
+        { name: "Navtag Media",       path: "../CSS/navtag.project/media.html",                        tag: "CSS",        category: "CSS"  },
+        { name: "Age Predictor",      path: "../JAVASCRIPT/AgePredictor.html",                         tag: "JAVASCRIPT", category: "JavaScript" },
+        { name: "Arithmetic Calculator", path: "../JAVASCRIPT/arthmeticcalculator.html",               tag: "JAVASCRIPT", category: "JavaScript" },
+        { name: "Counter App",        path: "../JAVASCRIPT/counter.html",                              tag: "JAVASCRIPT", category: "JavaScript" },
+        { name: "Login Page",         path: "../JAVASCRIPT/loginpage.html",                            tag: "JAVASCRIPT", category: "JavaScript" },
+        { name: "Toss Game",          path: "../JAVASCRIPT/TossGame.html",                             tag: "JAVASCRIPT", category: "JavaScript" },
+        { name: "Untitle",            path: "../JAVASCRIPT/untitle.html",                              tag: "JAVASCRIPT", category: "JavaScript" },
+        { name: "Untitle 2",          path: "../JAVASCRIPT/untitle.2.html",                           tag: "JAVASCRIPT", category: "JavaScript" }
+    ];
+
+    let activeFilter = "All";
+    let activeCard = null;
+
+    function loadProject(path, name, cardEl) {
+        const frame   = document.getElementById('project-frame');
+        const output  = document.getElementById('console-display');
+        const openLink = document.getElementById('open-project-link');
+
+        frame.src = path;
+        output.textContent = "Loaded: " + name;
+        openLink.href = path;
+
+        // Highlight active card
+        if (activeCard) activeCard.style.borderColor = '';
+        if (cardEl) { cardEl.style.borderColor = 'var(--accent)'; activeCard = cardEl; }
+    }
+
+    function renderProjectList() {
+        const list = document.getElementById('project-list');
+        if (!list) return;
+
+        const order = ["HTML", "CSS", "JavaScript"];
+        let html = "";
+
+        order.forEach((category) => {
+            const projects = projectFiles.filter(p => p.category === category);
+            if (!projects.length) return;
+
+            html += `<h3 class="project-group-title">${category}</h3>`;
+            html += projects.map((project, i) => {
+                return `
+                <div class="glass-card" data-tag="${project.tag}" data-name="${project.name.toLowerCase()}" data-index="${projectFiles.indexOf(project)}">
+                    <span class="tag">${project.tag}</span>
+                    <h4>${project.name}</h4>
+                    <p>${project.path}</p>
+                    <button class="run-btn" onclick="handleLoad(${projectFiles.indexOf(project)}, this)">▶ View Output</button>
+                </div>`;
+            }).join('');
+        });
+
+        list.innerHTML = html;
+        updateCount();
+    }
+
+    function handleLoad(index, btn) {
+        const project = projectFiles[index];
+        const card = btn.closest('.glass-card');
+        loadProject(project.path, project.name, card);
+    }
+
+    function updateCount() {
+        const visible = document.querySelectorAll('#project-list .glass-card:not(.hidden)').length;
+        document.getElementById('count-badge').textContent = visible + ' file' + (visible !== 1 ? 's' : '');
+    }
+
+    function applyFilters() {
+        const query = document.getElementById('search-input').value.toLowerCase();
+        const cards = document.querySelectorAll('#project-list .glass-card');
+        const groups = document.querySelectorAll('.project-group-title');
+
+        cards.forEach(card => {
+            const tag  = card.dataset.tag;
+            const name = card.dataset.name;
+            const tagMatch  = activeFilter === 'All' || tag === activeFilter;
+            const nameMatch = name.includes(query);
+            card.classList.toggle('hidden', !(tagMatch && nameMatch));
+        });
+
+        // Hide group titles if all cards in that group are hidden
+        groups.forEach(group => {
+            let sibling = group.nextElementSibling;
+            let allHidden = true;
+            while (sibling && !sibling.classList.contains('project-group-title')) {
+                if (!sibling.classList.contains('hidden')) allHidden = false;
+                sibling = sibling.nextElementSibling;
+            }
+            group.style.display = allHidden ? 'none' : '';
+        });
+
+        updateCount();
+    }
+
+    // Filter tabs
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProjectList();
+        loadProject(projectFiles[0].path, projectFiles[0].name, null);
+
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                activeFilter = tab.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        document.getElementById('search-input').addEventListener('input', applyFilters);
+    });
+    </script>
+</body>
+</html>

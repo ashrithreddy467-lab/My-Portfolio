@@ -1,0 +1,172 @@
+# My-Portfolio
+my portfolio as a code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashrith Reddy | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Redirect/Welcome Overlay -->
+    <div id="welcome-screen">
+        <div class="terminal-text">
+            <p>> System.init();</p>
+            <p>> Fetching_Credentials...</p>
+            <p>> Redirecting to Ashrith's Workspace...</p>
+            <div class="cursor"></div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky-nav">
+        <div class="nav-content">
+            <div class="logo">AR<span>_</span></div>
+            <ul class="nav-links">
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="mailto:ashrithreddy467@gmail.com" class="nav-btn">Contact Me</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="profile-header" id="about">
+            <div class="profile-main">
+                <img src="https://i.pinimg.com/736x/37/98/17/37981715ab1132dd9b53693e4251ac59.jpg" alt="Ashrith Reddy" class="avatar">
+                <div class="name-box">
+                    <h1>Ashrith Reddy.T</h1>
+                    <p class="subtitle">ECE Engineering Student @ 2025</p>
+                    <div class="social-links">
+                        <a href="https://github.com" target="_blank">[ GitHub ]</a>
+                        <a href="https://linkedin.com" target="_blank">[ LinkedIn ]</a>
+                        <a href="https://instagram.com" target="_blank">[ Instagram ]</a>
+                        <a href="https://codechef.com" target="_blank">[ CodeChef ]</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="main-grid">
+            <!-- LEFT COLUMN -->
+            <div class="col-left">
+                <div class="glass-card" id="skills">
+                    <h3>Technical Arsenal</h3>
+                    <div class="skill-category">
+                        <h4>Programming</h4>
+                        <div class="pills">
+                            <span>HTML5</span> <span>CSS3</span> <span>JavaScript</span> 
+                            <span>Python</span> <span>C/C++</span> <span>Java</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Hardware & Tools</h4>
+                        <div class="pills">
+                            <span>Arduino</span> <span>Raspberry Pi</span> <span>MATLAB</span> 
+                            <span>VLSI</span> <span>Embedded C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>Certifications</h3>
+                    <ul class="cert-list">
+                        <li><strong>Full Stack Web Dev</strong> </li>
+                        <li><strong>Python for Data Science</strong> </li>
+                        <li><strong>IoT Fundamentals</strong> </li>
+                    </ul>
+                </div>
+
+                <div class="glass-card">
+                    <h3>Soft Skills</h3>
+                    <p class="small-text">Problem Solving, Team Collaboration, Technical Documentation, Adaptability.</p>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="col-right">
+                <div class="glass-card" id="projects">
+                    <h3>Academic Research & Projects</h3>
+                    
+                    <div class="project-box">
+                        <div class="proj-header">
+                            <h4>Drowsiness Alert System</h4>
+                            <span class="tag">Patent Oriented</span>
+                        </div>
+                        <p>Developed a system using Arduino and sensors to detect drowsiness in drivers and alert them via visual and audio signals.</p>
+                    </div>
+
+                    <div class="project-box">
+                        <div class="proj-header">
+                            <h4>Skyguard AI</h4>
+                            <span class="tag">Deep Learning</span>
+                        </div>
+                        <p>Developed an AI-based system to monitor and analyze drone flight patterns for security applications using TensorFlow and OpenCV.</p>
+                    </div>
+
+                    <div class="project-box">
+                        <div class="proj-header">
+                            <h4>Smart Traffic Management</h4>
+                            <span class="tag">ECE Minor Project</span>
+                        </div>
+                        <p>Implemented a logic-gate based traffic controller to optimize vehicle flow based on IR sensor density.</p>
+                    </div>
+                </div>
+                
+
+                <div class="glass-card" id="education">
+                    <h3>Educational Roadmap</h3>
+                    <div class="edu-item highlight">
+                        <span class="year">2025 — 2029</span>
+                        <h4>B.Tech in Electronics & Communication</h4>
+                        <p>Focusing on Digital Signal Processing, Communication Systems, and Microprocessors. Active member of the Technical Club.</p>
+                    </div>
+                    <div class="edu-item">
+                        <span class="year">2023 — 2025</span>
+                        <h4>Intermediate / XII Standard</h4>
+                        <p>Major in MPC (Maths, Physics, Chemistry) with a focus on logical reasoning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Bottom Section -->
+        <section class="long-bio glass-card">
+            <h3>Philosophy & Goals</h3>
+            <p>As an ECE student, my goal is to bridge the gap between <strong>hardware reliability</strong> and <strong>software scalability</strong>. I am currently looking for internship opportunities where I can apply my Python and Web Development skills to solve real-world engineering challenges. I believe in clean code, practical hardware solutions, and continuous learning.</p>
+        </section>
+
+        <footer>
+            <p>© 2024 Ashrith Reddy • Built with Code & Coffee</p>
+        </footer>
+    </div>
+
+    <script>
+        // Welcome Screen Fade
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const screen = document.getElementById('welcome-screen');
+                screen.style.opacity = '0';
+                setTimeout(() => screen.style.display = 'none', 600);
+            }, 2500);
+        });
+
+        // Smooth Scroll Redirects
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+:root {
+    --bg: #0b0f1a;
+    --card-bg: #161b2b;
+    --accent: #1fa5d2; /* Changed to an "Engineering Green" */
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --nav-bg: rgba(11, 15, 26, 0.8);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+}
+
+/* Nav Bar */
+.sticky-nav {
+    position: fixed;
+    top: 0; width: 100%;
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    z-index: 90;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links { display: flex; list-style: none; gap: 20px; }
+.nav-links a { color: var(--text); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+.nav-links a:hover { color: var(--accent); }
+
+.nav-btn {
+    background: var(--accent);
+    color: var(--bg) !important;
+    padding: 5px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* Welcome Overlay */
+#welcome-screen {
+    position: fixed; inset: 0;
+    background: #000; z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease;
+}
+
+.terminal-text { font-family: 'Fira Code', monospace; color: var(--accent); }
+.cursor { width: 10px; height: 18px; background: var(--accent); display: inline-block; animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Container */
+.container { max-width: 1000px; margin: 80px auto 0; padding: 40px 20px; }
+
+header { margin-bottom: 60px; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.profile-main { display: flex; align-items: center; gap: 40px; }
+.avatar { width: 150px; height: 150px; border-radius: 24px; border: 3px solid var(--accent); filter: grayscale(20%); }
+
+h1 { font-size: 3.5rem; line-height: 1; }
+.subtitle { color: var(--accent); font-size: 1.3rem; margin: 10px 0; }
+.social-links a { color: var(--text-dim); text-decoration: none; margin-right: 15px; font-family: 'Fira Code', monospace; }
+
+/* Grid Layout */
+.main-grid { display: grid; grid-template-columns: 1fr 1.8fr; gap: 30px; }
+
+.glass-card {
+    background: var(--card-bg);
+    padding: 30px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.03);
+    margin-bottom: 30px;
+}
+
+h3 { color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; }
+
+/* Project Styling */
+.project-box { background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 3px solid var(--accent); }
+.proj-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.tag { font-size: 0.7rem; background: var(--accent); color: #000; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
+
+/* Skills & Certs */
+.pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
+.pills span { background: rgba(74, 222, 128, 0.1); color: var(--accent); padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-family: 'Fira Code'; }
+.cert-list { list-style: square; padding-left: 20px; color: var(--text-dim); font-size: 0.9rem; }
+.cert-list li { margin-bottom: 10px; }
+
+.edu-item { margin-bottom: 25px; }
+.year { color: var(--accent); font-weight: bold; font-family: 'Fira Code'; font-size: 0.8rem; }
+
+.long-bio { grid-column: span 1; }
+
+footer { text-align: center; padding: 60px 0; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+@media (max-width: 800px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .profile-main { flex-direction: column; text-align: center; }
+    .nav-links { display: none; } /* Simplified for mobile */
+}
+
+/* Projects page */
+.section-title {
+    color: var(--accent);
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+.projects-grid {
+    grid-template-columns: 1fr 1.5fr;
+    align-items: start;
+}
+
+.projects-grid .col-left {
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.projects-grid .col-left p {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    word-break: break-all;
+}
+
+.project-group-title {
+    margin: 6px 0 14px;
+}
+
+.console-box {
+    position: sticky;
+    top: 110px;
+}
+
+#console-display {
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+}
+
+.run-btn {
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 12px;
+    background: var(--accent);
+    color: #001018;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+}
+
+.run-btn:hover {
+    filter: brightness(1.08);
+}
+
+#project-frame {
+    width: 100%;
+    height: 500px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    background: #0a0d16;
+}
+
+.open-link {
+    margin-top: 16px;
+}
+
+@media (max-width: 800px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-grid .col-left {
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+    }
+
+    .console-box {
+        position: static;
+    }
+
+    #project-frame {
+        height: 420px;
+    }
+}
